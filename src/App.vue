@@ -1,4 +1,6 @@
 <script setup>
+import { ref } from 'vue';
+
 const produtos = [
     {
         id: 1,
@@ -54,7 +56,7 @@ const produtos = [
 
 </script>
 
-<template><
+<template>
 h1
 </template>
 
