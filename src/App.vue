@@ -1,70 +1,67 @@
 <script setup>
 import { ref } from 'vue';
-
-  const novoItem = ref({
-    nome: '',
-    preco: 0,
-    id: 0,
-  })
-
-  const carrinho = ref([])
-  const produtos = [
+  
+  const produtos = ref([
     {
         id: 1,
         nome: 'Camiseta',
-        preco: 49.90
+        preco: 49.90,
+        quantidade: 1
     },
     {
         id: 2,
         nome: 'Calça',
-        preco: 99.90
+        preco: 99.90,
+        quantidade: 1
     },
     {
         id: 3,
         nome: 'Meia',
-        preco: 9.90
+        preco: 9.90,
+        quantidade: 1
     },
     {
         id: 4,
         nome: 'Sapato',
-        preco: 199.90
+        preco: 199.90, 
+        quantidade: 1
     },
     {
         id: 5,
         nome: 'Boné',
-        preco: 29.90
+        preco: 29.90,
+        quantidade: 1
     },
     {
         id: 6,
         nome: 'Óculos',
-        preco: 99.90
+        preco: 99.90,
+        quantidade: 1
     },
     {
         id: 7,
         nome: 'Relógio',
-        preco: 299.90
+        preco: 299.90,
+        quantidade: 1
     },
     {
         id: 8,
         nome: 'Bermuda',
-        preco: 79.90
+        preco: 79.90,
+        quantidade: 1
     },
     {
         id: 9,
         nome: 'Cueca',
-        preco: 19.90
-    },
-    {
-        id: 10,
-        nome: 'Meia',
-        preco: 9.90
+        preco: 19.90,
+        quantidade: 1
     }
-]
+])
   
- let enviar = ref(false)
-let carrinho = ref([])
+  let enviar = ref(false)
+  let carrinho = ref([])
 
-function addcarrinho(item) {
+function addCarrinho(item) {
   const index = carrinho.value.findIndex(x => x.codigo === item.id)
   if (index > -1) {
     alert('item já está no carrinho')
@@ -90,14 +87,12 @@ function calculacarrinho() {
   }
 }
 
-function addquant(index) {
+function adicionarQuantidade(index) {
   produtos.value[index].quantidade++
-  // somaitem.value = item.preco * item.quantidade
 }
 
-function removerquant(index) {
+function removerQuant(index) {
   if (produtos.value[index].quantidade > 1) { produtos.value[index].quantidade-- }
-  // somaitem.value = item.preco * item.quantidade
 }
 
 function limpacarrinho() {
@@ -121,25 +116,21 @@ const avf = (value) => "R$ " + value.toFixed(2).replace('.', ',')
 
 </script>
 
-
-
-</script>
-
 <template>
-  <div class="produtos">
-    <h1>MIAUMIAUMIAU</h1>
+  <div class="itens">
+    <h1>Xingiling shops</h1>
     <ul>
       <li v-for="(item, index) in produtos" :key="index">
         <p>Item: {{ item.nome }}</p>
         <p>Valor: {{ avf(item.preco) }}</p>
         <p>Quantidade: {{ item.quantidade }}</p>
-        <p><button class="btn btn-primary data-bs-toggle="button" autocomplete="off"" @click="addcarrinho(item)">adicionar ao carrinho</button>
-          <button class="btn btn-primary btn-sm" @click="addquant(item.id - 1)">+</button>
-          <button class="btn btn-primary btn-sm" @click="removerquant(index)">-</button>
+        <p><button class="btn btn-primary btn-sm " @click="addCarrinho(item)">adicionar ao carrinho</button>
+          <button class="btn btn-primary btn-sm" @click="adicionarQuantidade(item.id - 1)">+</button>
+          <button class="btn btn-primary btn-sm" @click="removerQuant(index)">-</button>
         </p>
       </li>
     </ul>
-    <button class="btn btn-primary btn-lg" @click="vercarrinho()">Ver carrinho</button>
+    <button class="btn btn-primary" @click="vercarrinho()">Ver carrinho</button>
   </div>
   <div v-if="enviar" class="carrinho">
     <ul>
@@ -152,9 +143,8 @@ const avf = (value) => "R$ " + value.toFixed(2).replace('.', ',')
       </li>
     </ul>
     <p>Valor total: {{ avf(valorcarrinho) }}</p>
-    <button class="btn btn-primary btn-sm" @click="limpacarrinho()">limpa carrinho</button> 
-    <button class="btn btn-primary btn-sm" @click="enviar = !enviar">Fechar Carrinho</button>
-    aaa
+    <button class="btn btn-primary btn-sm" @click="limpacarrinho()">Limpar carrinho</button> 
+    <button class="btn btn-primary btn-sm" @click="enviar = !enviar">Fechar carrinho</button>
   </div>
 
 
@@ -163,13 +153,20 @@ const avf = (value) => "R$ " + value.toFixed(2).replace('.', ',')
 </template>
 
 <style scoped>
-.itens {
+ul {
+  width: 700px;
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
   align-content: center;
   justify-content: space-around;
-  margin-right: 1000px;
+}
+
+button {
+  margin: 3px;
+  box-shadow:  -1px 1px 5px rgba(0, 0, 0, 0.733);
+  background-color: rgb(189, 189, 189);
+  border: 2px rgb(255, 255, 255);
 }
 
 
