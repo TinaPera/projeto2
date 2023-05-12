@@ -61,16 +61,66 @@ import { ref } from 'vue';
     }
 ]
   
-  function adicionar(index) {
-    novoItem.value.nome = produtos[index].nome
-    novoItem.value.id = produtos[index].id
-    novoItem.value.preco = produtos[index].id
-    carrinho.value.push(novoItem.value)
+ let enviar = ref(false)
+let carrinho = ref([])
+
+function addcarrinho(item) {
+  const index = carrinho.value.findIndex(x => x.codigo === item.id)
+  if (index > -1) {
+    alert('item já está no carrinho')
+  }
+  else {
+    carrinho.value.push({
+      codigo: item.id,
+      nome: item.nome,
+      preco: item.preco,
+      quantidade: item.quantidade,
+      valortotal: item.preco * item.quantidade
+    })
+    calculacarrinho()
   }
 
-  function remover(index) {
-    carrinho.value.splice(index, 1)
+}
+
+let valorcarrinho = ref(0)
+function calculacarrinho() {
+  valorcarrinho.value = 0
+  for (let index = 0; index < carrinho.value.length; index++) {
+    valorcarrinho.value = valorcarrinho.value + carrinho.value[index].valortotal
   }
+}
+
+function addquant(index) {
+  produtos.value[index].quantidade++
+  // somaitem.value = item.preco * item.quantidade
+}
+
+function removerquant(index) {
+  if (produtos.value[index].quantidade > 1) { produtos.value[index].quantidade-- }
+  // somaitem.value = item.preco * item.quantidade
+}
+
+function limpacarrinho() {
+  carrinho.value = []
+  valorcarrinho.value = 0
+}
+function remover(index) {
+  carrinho.value.splice(index, 1)
+  calculacarrinho()
+}
+function vercarrinho() {
+  if(carrinho.value < [0]){
+    alert('carrinho vazio')
+  }
+  else{
+    enviar.value = !enviar.value
+  }
+}
+
+const avf = (value) => "R$ " + value.toFixed(2).replace('.', ',')
+
+</script>
+
 
 
 </script>
@@ -79,15 +129,7 @@ import { ref } from 'vue';
 
 
 
- <ul>
-    <li v-for="(item, index) in produtos">{{ item }} <button @click="adicionar(index)">adicionar</button></li>
-  </ul>
-
-  <div class="carrinho">
-    <ul>
-    <li v-for="(item, index) in carrinho">{{ JSON.stringify(item) }} <button @click="remover(index)">Remover</button></li>
-  </ul>
-  </div>
+ 
 
 </template>
 
