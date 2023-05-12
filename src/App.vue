@@ -133,13 +133,13 @@ const avf = (value) => "R$ " + value.toFixed(2).replace('.', ',')
         <p>Item: {{ item.nome }}</p>
         <p>Valor: {{ avf(item.preco) }}</p>
         <p>Quantidade: {{ item.quantidade }}</p>
-        <p><button class="btn btn-dark btn-sm" @click="addcarrinho(item)">adicionar ao carrinho</button>
-          <button class="btn btn-dark btn-sm" @click="addquant(item.id - 1)">+</button>
-          <button class="btn btn-dark btn-sm" @click="removerquant(index)">-</button>
+        <p><button class="btn btn-primary data-bs-toggle="button" autocomplete="off"" @click="addcarrinho(item)">adicionar ao carrinho</button>
+          <button class="btn btn-primary btn-sm" @click="addquant(item.id - 1)">+</button>
+          <button class="btn btn-primary btn-sm" @click="removerquant(index)">-</button>
         </p>
       </li>
     </ul>
-    <button class="btn btn-dark btn-lg" @click="vercarrinho()">Ver carrinho</button>
+    <button class="btn btn-primary btn-lg" @click="vercarrinho()">Ver carrinho</button>
   </div>
   <div v-if="enviar" class="carrinho">
     <ul>
@@ -148,12 +148,12 @@ const avf = (value) => "R$ " + value.toFixed(2).replace('.', ',')
         <p>Preço:{{ avf(item.preco) }}</p>
         <p>Quantidade: {{ item.quantidade }}</p>
         <p>valor total {{ avf(item.valortotal) }}</p>
-        <button class="btn btn-dark btn-sm" @click="remover(index)">remover</button>
+        <button class="btn btn-primary btn-sm" @click="remover(index)">remover</button>
       </li>
     </ul>
     <p>Valor total: {{ avf(valorcarrinho) }}</p>
-    <button class="btn btn-dark btn-sm" @click="limpacarrinho()">limpa carrinho</button> 
-    <button class="btn btn-dark btn-sm" @click="enviar = !enviar">Fechar Carrinho</button>
+    <button class="btn btn-primary btn-sm" @click="limpacarrinho()">limpa carrinho</button> 
+    <button class="btn btn-primary btn-sm" @click="enviar = !enviar">Fechar Carrinho</button>
     aaa
   </div>
 
@@ -175,6 +175,6 @@ const avf = (value) => "R$ " + value.toFixed(2).replace('.', ',')
 
 .produtos {
   background-color: black;
-  color: white;
+	color: white;
 }
 </style>
