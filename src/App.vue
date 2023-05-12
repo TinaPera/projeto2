@@ -173,8 +173,5 @@ const avf = (value) => "R$ " + value.toFixed(2).replace('.', ',')
 }
 
 
-.produtos {
-  background-color: black;
-	color: white;
-}
+
 </style>
