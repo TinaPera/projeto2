@@ -163,5 +163,12 @@ const avf = (value) => "R$ " + value.toFixed(2).replace('.', ',')
 </template>
 
 <style scoped>
-
+.itens {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-content: center;
+  justify-content: space-around;
+  margin-right: 1000px;
+}
 </style>
